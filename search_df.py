@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jul  7 10:53:29 2018
+Functions to simplify string search on dataframes
 
+Created on Sat Jul  7 10:53:29 2018
+Updated on Mon Jul 22 16:07    2024
 @author: David Escobar
 """
 
@@ -37,19 +39,20 @@ and find_in_string_all()'''
 
     
 def find_in_dataFrame(df, stringlist, find_type='any'):
-    '''Input:
+    '''
+    Returns a dataframe with rows that contain strings in stringlist, following the rule determined by "find_type" ("any" or "all")
+    
+    Input:
     df:DataFrame,
     stringlist:list of strings , 
     find_type: search type indicator. 'any' or 'all'
-
-
-    Output
+    
+    Output:
     if (find_type='any'): 
     A DataFrame with the rows that contain at least one of the strings in stringlist in any column.
     
     if (find_type='all'): 
     A DataFrame with the rows that contain all the strings in stringlist in any column.'
-    
     '''    
     
     dfm= df.applymap(lambda x: find_in_string(x, stringlist, find_type))
