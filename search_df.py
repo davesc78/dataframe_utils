@@ -38,7 +38,7 @@ and find_in_string_all()'''
         return find_in_string_all(string, stringlist)
 
     
-def find_in_dataFrame(df, stringlist, find_type='any'):
+def find_in_data_frame(df, stringlist, find_type='any'):
     '''
     Returns a dataframe with rows that contain strings in stringlist, following the rule determined by "find_type" ("any" or "all")
     
