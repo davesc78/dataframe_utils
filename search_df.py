@@ -61,10 +61,10 @@ def find_in_data_frame(df, string_list, find_type='any'):
     
     Output:
     if (find_type='any'): 
-    A DataFrame with the rows that contain at least one of the strings in string_list in any column.
+    A DataFrame with the rows that contain AT LEAST ONE of the strings in string_list in any column.
     
     if (find_type='all'): 
-    A DataFrame with the rows that contain all the strings in string_list in any column.
+    A DataFrame with the rows that contain ALL the strings in string_list in any column.
     '''    
     
     dfm= df.applymap(lambda x: find_in_string(x, string_list, find_type))
