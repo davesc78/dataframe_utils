@@ -1,1 +1,1 @@
-·## Functions to simplify string search on dataframes
+## Functions to simplify string search on dataframes
