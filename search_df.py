@@ -2,31 +2,33 @@
 """
 Created on Sat Jul  7 10:53:29 2018
 
-@author: david
+@author: David Escobar
 """
 
 import pandas as pd
 
 def find_in_string_any(string, stringlist):
-# retorna verdadero si string contiene al menos una de las cadenas en stringlist
+'''Returns true if the string contains at least one of the strings in stringlist'''     
      bol=False
-     for s in stringlist:
+     for s in list(stringlist):
              bol= (bol |  ((string.find(s)) != -1))
      return bol
     
 def find_in_string_all(string, stringlist):
-# retorna verdadero si string contiene al todas las cadenas en stringlist
+'''Returns true if the string contains all the strings in stringlist'''
      bol=True
-     for s in stringlist:
+     for s in list(stringlist):
              bol= (bol &  ((string.find(s)) != -1))
      return bol
     
     
 def find_in_string(string, stringlist, find_type='any'):
-# retorna verdadero si string contiene al menos una (find_type='any')
-# o todas (find_type='all')las cadenas en stringlist 
-# Esto se un "wrapper" de conveniencia de las funciones find_in_string_any()
-# y find_in_string_all()  
+'''Returns True if the string contains at least one (find_type='any')
+or all (find_type='all') the strings in stringlist 
+This is a convenience "wrapper" for find_in_string_any()
+and find_in_string_all()'''  
+
+     
     
     if find_type == 'any':
         return find_in_string_any(string, stringlist)
@@ -35,15 +37,18 @@ def find_in_string(string, stringlist, find_type='any'):
 
     
 def find_in_dataFrame(df, stringlist, find_type='any'):
-    '''input= DataFrame,  lista de cadenas de texto, find_type: indicador de tipo de busqueda
+    '''Input:
+    df:DataFrame,
+    stringlist:list of strings , 
+    find_type: search type indicator. 'any' or 'all'
+
+
+    Output
+    if (find_type='any'): 
+    A DataFrame with the rows that contain at least one of the strings in stringlist in any column.
     
-    si (find_type='any'): 
-    output= DataFrame con las filas que contienen al menos una de las cadenas
-    en cualquiera de sus columnas
-    
-    si (find_type='all'): 
-    output= DataFrame con las filas que contienen todas las cadenas
-    en cualquiera de sus columnas'
+    if (find_type='all'): 
+    A DataFrame with the rows that contain all the strings in stringlist in any column.'
     
     '''    
     
@@ -51,29 +56,32 @@ def find_in_dataFrame(df, stringlist, find_type='any'):
     return df.loc[dfm.any(axis='columns')]
    
 
-midf = pd.DataFrame({'uno' : ['hola', 's', 'no'], 'dos' : ['chao', 'pero', 'hasta'], 'tres':['nunca', 'simepre', 'cuando']})   
+my_df = pd.DataFrame({'a' : ['hello', 'yes', 'no'], 'b' : ['bubble', 'pet', 'unicorn'], 'c':['never', 'always', 'after']})   
 
 
-'''Ejemplo uso
-df
-    uno    dos     tres
-0  hola   chao    nunca
-1     s   pero  simepre
-2    no  hasta   cuando
+"""
+Usage example:
+
+my_df
+    a       b        c
+0  hello  ubble    never
+1   yes    pet    always
+2   no   unicorn   after
 
 
-find_in_dataFrame(midf,['p', 't'], 'any')
+find_in_dataFrame(my_df, ('p', 't'), 'any')
 
-  uno    dos     tres
-1   s   pero  simepre
-2  no  hasta   cuando
+     a      b       c
+1   yes    pet    always
+2   no   unicorn   after
 
 
-find_in_dataFrame(midf,['a', 'o'], 'all')
+find_in_dataFrame(my_df, ('e', 'o'), 'all')
 
-    uno    dos    tres
-0  hola   chao   nunca
-2    no  hasta  cuando'''
+      a    b     c
+0  hello  ubble    still
+
+"""
 
 
 
